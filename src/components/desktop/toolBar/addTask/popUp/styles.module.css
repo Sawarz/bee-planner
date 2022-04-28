@@ -1,0 +1,48 @@
+.popUp{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 90px;
+    left: 25vw;
+    padding: 20px;
+    padding-right: 70px;
+    background-color: white;
+    min-width: 15vw;
+    box-shadow: 0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
+}
+
+.closeButton{
+    cursor: pointer;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formElement{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.submitButton{
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
+}
