@@ -1,0 +1,6 @@
+.hour{
+    padding-left: 10px;
+    border:1px solid gray;
+    background-color: rgba(250, 212, 129, 0.712);
+    font-size: 1.3rem;
+}
