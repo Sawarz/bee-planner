@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+.appName{
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: 'Kaushan Script', sans-serif;
+}
+
+.nameLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
