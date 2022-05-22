@@ -1,0 +1,10 @@
+.Profile{
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    margin-left: auto;
+}
