@@ -1,20 +1,22 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import styles from './styles.module.css'
-import Hour from './hour/Hour';
-import Tile from './tile/Tile';
 import { useSelector } from 'react-redux';
+import Hour from './hour/Hour';
+import Task from '../../shared/task/Task';
+import CurrentTimeLine from '../../shared/currentTimeLine/CurrentTimeLine';
 
 export default function Day() {
     const [tasks, setTasks] = useState([])
+    const [currentTimeLine, setCurrentTimeLine] = useState(null);
+
+    const dayDiv = useRef();
 
     const hoursInDay = 24;
-    const minutesInHour = 60;
     const hoursInterval = 4;
-    const minutesInterval = 5;
     const numberOfDivs = hoursInDay / hoursInterval;
 
-    const colorsOdd = ["rgba(240, 248, 255, 0.856)", "rgba(250, 248, 129, 0.712)", "rgba(240, 248, 255, 0.856)", "rgba(250, 248, 129, 0.712)"];
-    const colorsEven = ["rgba(240, 248, 255, 0.856)", "rgba(250, 212, 129, 0.712)", "rgba(240, 248, 255, 0.856)", "rgba(250, 212, 129, 0.712)"]
+    const colorsOdd = ["rgba(240, 248, 255, 0.256)", "rgba(250, 248, 129, 0.312)", "rgba(240, 248, 255, 0.456)", "rgba(250, 248, 129, 0.312)"];
+    const colorsEven = ["rgba(240, 248, 255, 0.256)", "rgba(250, 212, 129, 0.312)", "rgba(240, 248, 255, 0.456)", "rgba(250, 212, 129, 0.312)"]
 
     let hoursChildren = [];
 
@@ -29,19 +31,24 @@ export default function Day() {
             }
         }}
 
-    let height = useSelector((state) => state.divSize.size);
     let tasksData = useSelector((state) => state.tasks)
-    
+    let todayDate = useSelector((state) => state.todayDate)
+
     useEffect(() => {
-        console.log(tasksData);
-        if(tasksData[0])
-        setTasks([...tasks, (<div>{tasksData[0].name}</div>)]);
+        let updatedTasks = tasksData.map((task, i) => {
+            if(task.date === todayDate)
+            return <Task key={i} data={task} parentDiv={dayDiv}></Task>
+        });
+        setTasks(updatedTasks);
+        setCurrentTimeLine(<CurrentTimeLine parentDiv={dayDiv}></CurrentTimeLine>)
     }, [tasksData])
 
+
     return (
-        <div className={styles.day}>
+        <div ref={dayDiv} className={styles.day}>
+            {currentTimeLine}
             {hoursChildren}
-            {tasks}
+            <div className={styles.tasks}>{tasks}</div>     
         </div>     
   )
 }

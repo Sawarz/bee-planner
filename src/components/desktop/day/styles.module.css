@@ -1,4 +1,14 @@
 .day{
+    position: relative;
     display: flex;
     flex-direction: column;
+}
+
+.tasks{
+    z-index: 1;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    left: 10vw;
 }
