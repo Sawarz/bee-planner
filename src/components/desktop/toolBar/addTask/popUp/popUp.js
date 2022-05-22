@@ -1,14 +1,19 @@
-import { React, useState, useEffect } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
 import { Formik } from 'formik';
-import Tile from '../../../day/tile/Tile';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../../../../redux/tasksSlice';
+import firebase from '../../../../../firebase/Firebase'
+import { v4 } from 'uuid';
+import ColorInput from './colorInput/ColorInput';
 
 export default function PopUp(props) {
-	const [toggleTime, setToggleTime] = useState('minutes');
-
 	let dispatch = useDispatch();
+
+	let year = new Date().getFullYear();
+	let month = new Date().getMonth()+1;
+	let day = new Date().getDate();
+	let todayDate = day + "." + month + "." + year;
 
 	const validate = (values) => {
 		const errors = {};
@@ -36,10 +41,13 @@ export default function PopUp(props) {
 					color: '',
 					startHour: 0,
 					startMinute: 0,
+					date: todayDate,
+					id: v4()
 				}}
 				validateForm={{ validate }}
-        onSubmit={(values) => {
-					dispatch(addTask(values))
+				onSubmit={(values) => {
+			dispatch(addTask(values));
+					firebase.update();
 				}}
 			>
 				{({
@@ -84,13 +92,12 @@ export default function PopUp(props) {
 						</div>
 						<div className={styles.formElement}>
 							<label>Color: </label>
-							<input
+							<ColorInput
 								id='color'
 								name='color'
-								type='text'
 								onChange={handleChange}
 								value={values.color}
-							></input>
+							></ColorInput>
 						</div>
 						<div className={styles.formElement}>
 							<label>Start time: </label>
@@ -103,9 +110,6 @@ export default function PopUp(props) {
 								onBlur={(e) => {
 									handleBlur(e);
 									let value = parseInt(e.target.value);
-									if (value % 5 != 0) {
-										value = value + (5 - (value % 5));
-									}
 									if (value > 23) value = 23;
 									setFieldValue('startHour', value);
 								}}
@@ -139,8 +143,7 @@ export default function PopUp(props) {
 				className={styles.closeButton}
         onClick={() => {
           props.toggle();
-				}}
-			>
+				}}>
 				X
 			</button>
 		</div>
