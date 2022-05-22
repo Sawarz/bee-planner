@@ -8,7 +8,6 @@ export default function Hour(props) {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(ref.current.offsetHeight);
     dispatch(setDivSize(ref.current.offsetHeight))
   }, [])
   
