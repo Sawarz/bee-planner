@@ -1,21 +1,29 @@
 import { configureStore } from "@reduxjs/toolkit";
 import deviceSlice from "./deviceSlice";
-import calendarSlice from "./calendarSlice";
+import todayDateSlice from "./todayDateSlice";
 import divSizeSlice from "./divSizeSlice";
 import tasksSlice from "./tasksSlice";
 import { loadState } from "./localStorage";
 
 const savedState = loadState();
 
-export default configureStore({
+let todayDay = new Date().getDate();
+let todayMonth = new Date().getMonth() + 1;
+let todayYear = new Date().getFullYear();
+
+let todayDate = todayDay + "." + todayMonth + "." + todayYear;
+
+const store = configureStore({
     reducer: {
         device: deviceSlice,
-        calendar: calendarSlice,
+        todayDate: todayDateSlice,
         divSize: divSizeSlice,
         tasks: tasksSlice
     },
     preloadedState: {
         device: null,
-        calendar: savedState.calendar
+        todayDate: todayDate
     }
 })
+
+export default store;
