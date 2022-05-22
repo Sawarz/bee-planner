@@ -28,7 +28,6 @@ const firebase = {
           }
         );
       } 
-      const docSna = await getDoc(docRef);
     }
 }
 
