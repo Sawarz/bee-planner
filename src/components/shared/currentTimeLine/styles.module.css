@@ -1,0 +1,9 @@
+.currentTimeLine{
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    width: 120vw;
+    height: 2px;
+    transform: translateX(-10%);
+    background-color: red;
+}
