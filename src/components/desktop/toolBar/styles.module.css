@@ -1,4 +1,6 @@
 .toolBar{
+    padding-right: 100px;
+    z-index: 50;
     display: flex;
     flex-direction: row;
     align-items: center;
