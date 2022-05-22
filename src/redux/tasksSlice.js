@@ -8,14 +8,9 @@ export const tasksSlice = createSlice({
             state.push(action.payload);
         },
         deleteTask: (state, action) => {
-            let arrayIndex;
-            console.log(action.payload);
-            for (const [i, task] of state.entries()) {
-                if (action.payload.name === task.name) {
-                    arrayIndex = i;
-                    break;
-                }
-            }
+            let arrayIndex = state.findIndex((task) => {
+                return task.name = action.payload.name;
+            })
             state.splice(arrayIndex, 1);
         }
     }
