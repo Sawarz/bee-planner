@@ -4,16 +4,12 @@ import { useSelector } from 'react-redux'
 import Day from '../day/Day';
 
 export default function Today() {
-  const date = new Date();
-  const todayYear = date.getFullYear();
-  const todayMonth = date.getMonth()+1;
-  const todayDay = date.getDate();
-  const todayTasks = useSelector((state) => state.calendar)
+  let today = useSelector(state => state.todayDate);
 
   return (
     <div className={styles.today}>
       <div className={styles.date}>
-        {todayDay+'.'+todayMonth+'.'+todayYear}
+        {today}
       </div>
       <div className={styles.title}>Today's tasks:</div>
       <Day></Day>
