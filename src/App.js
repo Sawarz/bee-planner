@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import './App.css';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/shared/protectedRoute/ProtectedRoute';
@@ -6,15 +6,18 @@ import DesktopRouteWrapper from './components/desktop/desktopRouteWrapper/Deskto
 import Login from './components/shared/login/Login';
 import Register from './components/shared/register/Register';
 import Dashboard from './components/desktop/dashboard/Dashboard';
-import { Provider } from 'react-redux';
-import store from './redux/Store';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import loadTasksFromDB from './firebase/firebaseLoad';
+import { addTask } from './redux/tasksSlice';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const auth = getAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks)
 
   let timeout = () => {
     setTimeout(() => {
@@ -22,25 +25,49 @@ function App() {
     }, 500)
   };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      timeout = () => {
-        return null
-      };
-      setLoggedIn(true);
-    } else {
-      timeout = () => {
-        setTimeout(() => {
-          return <Navigate to="/login" replace />;
-        }, 500)
-      };
-      setLoggedIn(false);
+  useEffect(() => {
+    const unsubscribe =
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          timeout = () => {
+            return null
+          };
+          setLoggedIn(true);
+          async function loadDBToRedux() {
+            let tasksFromDB = await loadTasksFromDB();
+            if (tasksFromDB) {
+              tasksFromDB.forEach((taskDB) => {
+                let taskLoaded = tasks.some((task) => {
+                  return task.id == taskDB.id
+                });
+                if (taskLoaded == false) {
+                  dispatch(addTask(taskDB))
+                }
+                
+              })
+              }
+            }
+        
+          loadDBToRedux();
+        } else {
+          timeout = () => {
+            setTimeout(() => {
+              return <Navigate to="/login" replace />;
+            }, 500)
+          };
+          setLoggedIn(false);
+        }
+      });
+    return () => {
+      unsubscribe();
     }
-  });
+  }, [])
+  
+  
+  
 
   return (
     <div className="App">
-      <Provider store={store}>
         <Routes>
           <Route path="/login" element={loggedIn ? <Navigate to="/" replace />: <Login/>} />
           <Route path="/register" element={<Register />} />
@@ -49,7 +76,6 @@ function App() {
               children={<DesktopRouteWrapper component={<Dashboard />} />}>
           </ProtectedRoute>}/>
         </Routes>
-      </Provider>
     </div>
   );
 }
