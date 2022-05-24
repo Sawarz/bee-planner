@@ -42,11 +42,13 @@ export default function PopUp(props) {
 					startHour: 0,
 					startMinute: 0,
 					date: todayDate,
-					id: v4()
+					id: null,
+					left: 0
 				}}
 				validateForm={{ validate }}
 				onSubmit={(values) => {
-			dispatch(addTask(values));
+					values.id = v4();
+					dispatch(addTask(values));
 					firebase.update();
 				}}
 			>
