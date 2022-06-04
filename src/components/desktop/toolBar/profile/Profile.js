@@ -10,10 +10,13 @@ export default function Profile() {
   const [sliderToggle, setSliderToggle] = useState(false);
 
   return (
-    <button className={styles.Profile} onClick={()=>{setSliderToggle(!sliderToggle)}}>
+    <div className={styles.Profile}>
+      <button className={styles.ProfileButton} onClick={()=>{setSliderToggle(!sliderToggle)}}>
       <FontAwesomeIcon icon={faArrowDown}></FontAwesomeIcon>
       <FontAwesomeIcon icon={faUser} size="2x"></FontAwesomeIcon>
+      </button>
       {sliderToggle ? <ProfileSlider /> : null}
-    </button>
+    </div>
+    
   )
 }
