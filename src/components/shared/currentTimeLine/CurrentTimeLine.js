@@ -25,7 +25,7 @@ export default function CurrentTimeLine(props) {
     }, [currentMinutes])
   
   useEffect(() => {
-    scrollRef.current.scrollIntoView({ behavior: 'smooth' }) 
+    scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' }) 
   },[])
     
     
