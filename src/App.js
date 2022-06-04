@@ -9,7 +9,9 @@ import Dashboard from './components/desktop/dashboard/Dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import loadTasksFromDB from './firebase/firebaseLoad';
+import loadUsername from './firebase/usernameLoad';
 import { addTask } from './redux/tasksSlice';
+import { setUsername } from './redux/usernameSlice';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -34,7 +36,9 @@ function App() {
           };
           setLoggedIn(true);
           async function loadDBToRedux() {
+            let usernameFromDB = await loadUsername();
             let tasksFromDB = await loadTasksFromDB();
+            dispatch(setUsername(usernameFromDB));
             if (tasksFromDB) {
               tasksFromDB.forEach((taskDB) => {
                 let taskLoaded = tasks.some((task) => {
