@@ -39,14 +39,20 @@ export default function PopUp(props) {
 					name: '',
 					duration: 0,
 					color: '',
-					startHour: 0,
-					startMinute: 0,
+					startHour: '',
+					startMinute: '',
 					date: todayDate,
 					id: null,
 					left: 0
 				}}
 				validateForm={{ validate }}
 				onSubmit={(values) => {
+					if (values.startHour == '') {
+						values.startHour = 0;
+					}
+					if (values.startMinute == '') {
+						values.startMinute = 0;
+					}
 					values.id = v4();
 					dispatch(addTask(values));
 					firebase.update();
@@ -75,24 +81,6 @@ export default function PopUp(props) {
 							{errors.name ? <div>{errors.name}</div> : null}
 						</div>
 						<div className={styles.formElement}>
-							<label>Duration in minutes: </label>
-							<input
-								id='duration'
-								name='duration'
-								type='number'
-								onChange={handleChange}
-								onBlur={(e) => {
-									handleBlur(e);
-									let value = parseInt(e.target.value);
-									if (value % 5 != 0) {
-										value = value + (5 - (value % 5));
-									}
-									setFieldValue('duration', value);
-								}}
-								value={values.duration}
-							></input>
-						</div>
-						<div className={styles.formElement}>
 							<label>Color: </label>
 							<ColorInput
 								id='color'
@@ -107,7 +95,7 @@ export default function PopUp(props) {
 							<input
 								id='startHour'
 								name='startHour'
-								type='number'
+								type='text'
 								onChange={handleChange}
 								onBlur={(e) => {
 									handleBlur(e);
@@ -116,12 +104,13 @@ export default function PopUp(props) {
 									setFieldValue('startHour', value);
 								}}
 								value={values.startHour}
+								placeholder="0"
 							></input>
 							<label>Minute:</label>
 							<input
 								id='startMinute'
 								name='startMinute'
-								type='number'
+								type='text'
 								onChange={handleChange}
 								onBlur={(e) => {
 									handleBlur(e);
@@ -133,6 +122,7 @@ export default function PopUp(props) {
 									setFieldValue('startMinute', value);
 								}}
 								value={values.startMinute}
+								placeholder="0"
 							></input>
 						</div>
 						<button className={styles.submitButton} type='submit'>
