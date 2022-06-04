@@ -3,9 +3,7 @@ import deviceSlice from "./deviceSlice";
 import todayDateSlice from "./todayDateSlice";
 import divSizeSlice from "./divSizeSlice";
 import tasksSlice from "./tasksSlice";
-import { loadState } from "./localStorage";
-
-const savedState = loadState();
+import usernameSlice from "./usernameSlice";
 
 let todayDay = new Date().getDate();
 let todayMonth = new Date().getMonth() + 1;
@@ -18,7 +16,8 @@ const store = configureStore({
         device: deviceSlice,
         todayDate: todayDateSlice,
         divSize: divSizeSlice,
-        tasks: tasksSlice
+        tasks: tasksSlice,
+        username: usernameSlice
     },
     preloadedState: {
         device: null,
