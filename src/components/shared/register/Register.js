@@ -39,6 +39,10 @@ export default function Login({setToken}) {
           setErrorMessage("Password too weak (atleast 6 characters)");
           break;
         }
+        case ("auth/email-already-in-use"): {
+          setErrorMessage("Email already used by an account");
+          break;
+        }
       }
     });
     }
