@@ -22,7 +22,7 @@ export default function Day() {
 
     for (let i = 0; i < numberOfDivs; i++) {
         let even = false;
-        if (i % 2 == 0) even = true;
+        if (i % 2 === 0) even = true;
         for (let y = i * hoursInterval; y < hoursInterval * i + hoursInterval; y++){
             if(even)
                 hoursChildren.push(<Hour key={y} hour={y} color={colorsOdd[y % 4]}></Hour>)
@@ -41,7 +41,7 @@ export default function Day() {
         });
         setTasks(updatedTasks);
         setCurrentTimeLine(<CurrentTimeLine parentDiv={dayDiv}></CurrentTimeLine>)
-    }, [tasksData])
+    }, [tasksData, todayDate])
 
 
     return (
