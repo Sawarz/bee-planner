@@ -43,6 +43,13 @@ export default function Login({setToken}) {
           setErrorMessage("Email already used by an account");
           break;
         }
+        case ("auth/wrong-password"): {
+          setErrorMessage("Wrong password");
+          break;
+        }
+        default: {
+          break;
+        }
       }
     });
     }

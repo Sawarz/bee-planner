@@ -16,7 +16,6 @@ export default function Login() {
     
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
         setErrorMessage("");
     })
     .catch((error) => {
@@ -29,6 +28,9 @@ export default function Login() {
         }
         case ("auth/weak-password"): {
           setErrorMessage("Password too weak (atleast 6 characters)");
+          break;
+        }
+        default: {
           break;
         }
       }
