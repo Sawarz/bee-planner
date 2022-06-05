@@ -1,11 +1,12 @@
 import { React, useState, useEffect } from 'react';
 import './App.css';
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './components/shared/protectedRoute/ProtectedRoute';
 import DesktopRouteWrapper from './components/desktop/desktopRouteWrapper/DesktopRouteWrapper';
 import Login from './components/shared/login/Login';
 import Register from './components/shared/register/Register';
 import Dashboard from './components/desktop/dashboard/Dashboard';
+import Calendar from './components/desktop/toolBar/calendar/Calendar';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import loadTasksFromDB from './firebase/firebaseLoad';
@@ -42,9 +43,9 @@ function App() {
             if (tasksFromDB) {
               tasksFromDB.forEach((taskDB) => {
                 let taskLoaded = tasks.some((task) => {
-                  return task.id == taskDB.id
+                  return task.id === taskDB.id
                 });
-                if (taskLoaded == false) {
+                if (taskLoaded === false) {
                   dispatch(addTask(taskDB))
                 }
                 
@@ -78,6 +79,10 @@ function App() {
           <Route path="/" element={
             <ProtectedRoute loggedIn={loggedIn} timeout={timeout}
               children={<DesktopRouteWrapper component={<Dashboard />} />}>
+          </ProtectedRoute>} />
+          <Route path="/calendar" element={
+            <ProtectedRoute loggedIn={loggedIn} timeout={timeout}
+              children={<DesktopRouteWrapper component={<Calendar />} />}>
           </ProtectedRoute>}/>
         </Routes>
     </div>
