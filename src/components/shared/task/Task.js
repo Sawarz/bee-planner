@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import firebase from '../../../firebase/Firebase';
 import { useDispatch, useSelector } from 'react-redux';
-import tasksSlice, { deleteTask, updateTaskLeftPosition } from '../../../redux/tasksSlice';
+import { deleteTask, updateTaskLeftPosition } from '../../../redux/tasksSlice';
 
 export default function Task(props) {
   const [left, setLeft] = useState(props.data.left);
@@ -18,23 +18,19 @@ export default function Task(props) {
   useEffect(() => {
     let tempLeft = data.left;
     localTasksData.some(task => {
-      if (data.id != task.id) {
+      if (data.id !== task.id) {
         let timeDifference;
         let hoursDifference = Math.abs(data.startHour - task.startHour);
         let minutesDifference = () => {
-          if (hoursDifference == 1)
+          if (hoursDifference === 1)
             return 60 - Math.abs(data.startMinute - task.startMinute);
           else {
             return Math.abs(data.startMinute + task.startMinute);
           }
         }
         timeDifference = minutesDifference();
-        if (data.name == "es") {
-          console.log(timeDifference);
-          console.log(task.name);
-        }
-        if (data.startHour == task.startHour || timeDifference < 30) {
-          if (tempLeft == task.left) {
+        if (data.startHour === task.startHour || timeDifference < 30) {
+          if (tempLeft === task.left) {
             tempLeft = parseInt(tempLeft) + 300 + "px";
             setLeft(tempLeft);
             dispatch(updateTaskLeftPosition({
@@ -50,10 +46,10 @@ export default function Task(props) {
   
 
   function renderMinutes() {
-    if (data.startMinute == 0) {
+    if (data.startMinute === 0) {
       return '00';
     }
-    else if (data.startMinute == 5) {
+    else if (data.startMinute === 5) {
       return '05';
     }
     else {
