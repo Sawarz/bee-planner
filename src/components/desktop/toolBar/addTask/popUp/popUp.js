@@ -17,16 +17,10 @@ export default function PopUp(props) {
 
 	const validate = (values) => {
 		const errors = {};
-		if (!values.name) {
-			errors.name = 'Required';
+		if (!values.name || values.name === "") {
+			errors.name = 'Task name is required';
 		} else if (values.name.length > 20) {
 			errors.name = 'Must be 20 characters or less';
-		}
-
-		if (!values.duration) {
-			errors.duration = 'Required';
-		} else if (values.duration > 1440) {
-			errors.duration = 'Must be 1440 characters or less';
 		}
 
 		return errors;
@@ -45,12 +39,12 @@ export default function PopUp(props) {
 					id: null,
 					left: 0
 				}}
-				validateForm={{ validate }}
+				validate={validate}
 				onSubmit={(values) => {
-					if (values.startHour == '') {
+					if (values.startHour === '') {
 						values.startHour = 0;
 					}
-					if (values.startMinute == '') {
+					if (values.startMinute === '') {
 						values.startMinute = 0;
 					}
 					values.id = v4();
@@ -78,7 +72,7 @@ export default function PopUp(props) {
 								onChange={handleChange}
 								value={values.name}
 							/>
-							{errors.name ? <div>{errors.name}</div> : null}
+							{errors.name ? <div className={styles.error}>{errors.name}</div> : null}
 						</div>
 						<div className={styles.formElement}>
 							<label>Color: </label>
@@ -115,7 +109,7 @@ export default function PopUp(props) {
 								onBlur={(e) => {
 									handleBlur(e);
 									let value = parseInt(e.target.value);
-									if (value % 5 != 0) {
+									if (value % 5 !== 0) {
 										value = value + (5 - (value % 5));
 									}
 									if (value > 55) value = 55;
