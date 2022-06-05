@@ -11,7 +11,7 @@ const ColorPicker = ({ handleClick }) => {
       <div className={styles.colorPicker}>
           {colors.map((color, i) => {
             let colorClassnames = styles.color;
-              if (chosenColor == i) {
+              if (chosenColor === i) {
                   colorClassnames = styles.color + " " + styles.chosen;
               }
               return <div key={i} className={colorClassnames} style={{ backgroundColor: color }} onClick={(e) => {
