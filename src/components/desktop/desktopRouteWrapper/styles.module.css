@@ -3,10 +3,9 @@
 }
 
 .desktopPageContent{
-    padding-top: 80px;
-    padding-left: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    padding-top: 100px;
+    background-color: rgba(249, 255, 199, 0.644);
 }
 

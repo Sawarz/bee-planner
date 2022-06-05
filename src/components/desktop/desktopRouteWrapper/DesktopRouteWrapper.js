@@ -7,8 +7,9 @@ export default function DesktopRouteWrapper(props) {
   return (
     <div className={styles.desktopPage}>
       <ToolBar ></ToolBar>
-      <div className={styles.desktopPageContent}></div>
-          {props.component}
+      <div className={styles.desktopPageContent}>
+        {props.component}
+      </div>
     </div>
   )
 }
