@@ -10,14 +10,14 @@ export const tasksSlice = createSlice({
         },
         deleteTask: (state, action) => {
             let arrayIndex = state.findIndex((task) => {
-                return task.id == action.payload.id;
+                return task.id === action.payload.id;
             })
             state.splice(arrayIndex, 1);
             return state;
         },
         updateTaskLeftPosition: (state, action) => {
             for (let task of state) {
-                if (task.id == action.payload.id) {
+                if (task.id === action.payload.id) {
                     task.left = action.payload.left;
                 }
             }
