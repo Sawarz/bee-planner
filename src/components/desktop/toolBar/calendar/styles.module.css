@@ -1,0 +1,35 @@
+.calendar{
+    width: 100%;
+}
+
+.todayDate{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.weekdays{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday{
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid black;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.month{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.day{
+    padding: 10px;
+    height: 15vh;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid black;
+}
