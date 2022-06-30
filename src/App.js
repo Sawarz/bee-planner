@@ -83,6 +83,10 @@ function App() {
           <Route path="/calendar" element={
             <ProtectedRoute loggedIn={loggedIn} timeout={timeout}
               children={<DesktopRouteWrapper component={<Calendar />} />}>
+          </ProtectedRoute>} />
+          <Route path="/calendar/:day" element={
+            <ProtectedRoute loggedIn={loggedIn} timeout={timeout}
+              children={<DesktopRouteWrapper component={<Dashboard />} />}>
           </ProtectedRoute>}/>
         </Routes>
     </div>
