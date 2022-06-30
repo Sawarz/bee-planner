@@ -5,9 +5,11 @@ import Hour from './hour/Hour';
 import Task from '../../shared/task/Task';
 import CurrentTimeLine from '../../shared/currentTimeLine/CurrentTimeLine';
 
-export default function Day() {
+export default function Day(props) {
     const [tasks, setTasks] = useState([])
     const [currentTimeLine, setCurrentTimeLine] = useState(null);
+
+    let today = useSelector(state => state.todayDate);
 
     const dayDiv = useRef();
 
@@ -45,10 +47,16 @@ export default function Day() {
 
 
     return (
+        <div className={styles.today}>
+            <div className={styles.date}>
+        {props.currentDay ? props.currentDay : today}
+      </div>
+      <div className={styles.title}>Today's tasks:</div>
         <div ref={dayDiv} className={styles.day}>
-            {currentTimeLine}
+        {props.currentDay ? null : currentTimeLine}
             {hoursChildren}
             <div className={styles.tasks}>{tasks}</div>     
         </div>     
+    </div>
   )
 }

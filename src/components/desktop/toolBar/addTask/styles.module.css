@@ -1,5 +1,6 @@
 .addTask{
     padding: 5px;
+    margin-left: 15px;
     cursor: pointer;
     font-size: 2rem;
     border: none;

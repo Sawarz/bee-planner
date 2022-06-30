@@ -6,14 +6,19 @@ import { addTask } from '../../../../../redux/tasksSlice';
 import firebase from '../../../../../firebase/Firebase'
 import { v4 } from 'uuid';
 import ColorInput from './colorInput/ColorInput';
+import { useSelector } from 'react-redux';
 
 export default function PopUp(props) {
 	let dispatch = useDispatch();
+	let currentDay = useSelector(state => state.currentDay.day);
 
 	let year = new Date().getFullYear();
 	let month = new Date().getMonth()+1;
 	let day = new Date().getDate();
 	let todayDate = day + "." + month + "." + year;
+	if (currentDay) {
+		todayDate = currentDay;
+	}
 
 	const validate = (values) => {
 		const errors = {};
