@@ -57,6 +57,7 @@ export default function PopUp(props) {
 					dispatch(addTask(values));
 					dispatch(setLatestTask(values))
 					firebase.update();
+					props.toggle();
 				}}
 			>
 				{({
