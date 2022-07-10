@@ -10,14 +10,21 @@ export default function Task(props) {
   let dispatch = useDispatch();
   let data = props.data;
   let tasksData = useSelector(state => state.tasks);
-  let localTasksData = tasksData.slice();
+
+  function checkTaskDay(task) {
+    return task.date === data.date
+  }
+
+  let currentDayTasks = tasksData.filter(checkTaskDay);
+
+
   let parentDivHeight = props.parentDiv.current.offsetHeight;
 
   let top = (data.startHour * parentDivHeight / 24) + (data.startMinute * (parentDivHeight / (24 * 60))) + "px";
 
   useEffect(() => {
     let tempLeft = data.left;
-    localTasksData.some(task => {
+    currentDayTasks.some(task => {
       if (data.id !== task.id) {
         let timeDifference;
         let hoursDifference = Math.abs(data.startHour - task.startHour);
