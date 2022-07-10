@@ -6,7 +6,7 @@ import DesktopRouteWrapper from './components/desktop/desktopRouteWrapper/Deskto
 import Login from './components/shared/login/Login';
 import Register from './components/shared/register/Register';
 import Dashboard from './components/desktop/dashboard/Dashboard';
-import Calendar from './components/desktop/toolBar/calendar/Calendar';
+import Calendar from './components/desktop/calendar/Calendar'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import loadTasksFromDB from './firebase/firebaseLoad';
