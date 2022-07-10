@@ -9,7 +9,7 @@ export default function Day(props) {
     const [tasks, setTasks] = useState([])
     const [currentTimeLine, setCurrentTimeLine] = useState(null);
 
-    let today = useSelector(state => state.todayDate);
+    let today = useSelector(state => state.today);
 
     const dayDiv = useRef();
 
@@ -34,16 +34,15 @@ export default function Day(props) {
         }}
 
     let tasksData = useSelector((state) => state.tasks)
-    let todayDate = useSelector((state) => state.todayDate)
 
     useEffect(() => {
         let updatedTasks = tasksData.map((task, i) => {
-            if(task.date === todayDate)
+            if(task.date === today)
             return <Task key={i} data={task} parentDiv={dayDiv}></Task>
         });
         setTasks(updatedTasks);
         setCurrentTimeLine(<CurrentTimeLine parentDiv={dayDiv}></CurrentTimeLine>)
-    }, [tasksData, todayDate])
+    }, [tasksData, today])
 
 
     return (
@@ -51,7 +50,7 @@ export default function Day(props) {
             <div className={styles.date}>
         {props.currentDay ? props.currentDay : today}
       </div>
-      <div className={styles.title}>Today's tasks:</div>
+      <div className={styles.title}>Day's tasks:</div>
         <div ref={dayDiv} className={styles.day}>
         {props.currentDay ? null : currentTimeLine}
             {hoursChildren}
