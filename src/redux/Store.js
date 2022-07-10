@@ -5,6 +5,7 @@ import divSizeSlice from "./divSizeSlice";
 import tasksSlice from "./tasksSlice";
 import usernameSlice from "./usernameSlice";
 import currentDaySlice from "./currentDaySlice";
+import latestTaskSlice from "./latestTaskSlice";
 
 let todayDay = new Date().getDate();
 let todayMonth = new Date().getMonth() + 1;
@@ -19,7 +20,8 @@ const store = configureStore({
         divSize: divSizeSlice,
         tasks: tasksSlice,
         username: usernameSlice,
-        currentDay: currentDaySlice
+        currentDay: currentDaySlice,
+        latestTask: latestTaskSlice
     },
     preloadedState: {
         device: null,

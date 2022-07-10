@@ -7,6 +7,7 @@ import firebase from '../../../../../firebase/Firebase'
 import { v4 } from 'uuid';
 import ColorInput from './colorInput/ColorInput';
 import { useSelector } from 'react-redux';
+import { setLatestTask } from '../../../../../redux/latestTaskSlice';
 
 export default function PopUp(props) {
 	let dispatch = useDispatch();
@@ -54,6 +55,7 @@ export default function PopUp(props) {
 					}
 					values.id = v4();
 					dispatch(addTask(values));
+					dispatch(setLatestTask(values))
 					firebase.update();
 				}}
 			>

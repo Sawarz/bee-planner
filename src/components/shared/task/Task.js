@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import styles from './styles.module.css'
 import firebase from '../../../firebase/Firebase';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,8 @@ import { deleteTask, updateTaskLeftPosition } from '../../../redux/tasksSlice';
 
 export default function Task(props) {
   const [left, setLeft] = useState(props.data.left);
+
+  const scrollRef = useRef();
 
   let dispatch = useDispatch();
   let data = props.data;
@@ -63,9 +65,17 @@ export default function Task(props) {
       return data.startMinute;
     }
   }
+
+  let latestTask = useSelector(state => state.latestTask.task)
+
+  useEffect(() => {
+    if(latestTask != undefined)
+      if(data.id === latestTask.id)
+        scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' }) 
+  }, [tasksData])
   
   return (
-    <div className={styles.task} style={{top: top, left: left, backgroundColor: data.color}}>
+    <div className={styles.task} ref={scrollRef} style={{top: top, left: left, backgroundColor: data.color}}>
       <div className={styles.startTime}>{data.startHour}:{renderMinutes()}</div>
       <div className={styles.name}>{data.name}</div>
       <button onClick={() => {
