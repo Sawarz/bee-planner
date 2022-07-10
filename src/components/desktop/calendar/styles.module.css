@@ -27,6 +27,8 @@
 }
 
 .day, .grayDay, .currentDay{
+    text-decoration: none;
+    color: black;
     padding: 10px;
     height: 15vh;
     font-size: 1.2rem;
