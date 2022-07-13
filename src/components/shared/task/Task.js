@@ -79,7 +79,6 @@ export default function Task(props) {
       <div className={styles.startTime}>{data.startHour}:{renderMinutes()}</div>
       <div className={styles.name}>{data.name}</div>
       <button onClick={() => {
-        console.log(data)
         dispatch(deleteTask(data));
         firebase.update();
       }} className={styles.deleteButton}>X</button>
