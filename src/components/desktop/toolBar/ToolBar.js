@@ -9,9 +9,10 @@ import { useMediaQuery } from 'react-responsive'
 import calendarImg from '../../../assets/calendar.png'
 
 export default function ToolBar() {
-  const mobileDevice = useMediaQuery({query: 'max-width:480px'});
+  const mobileDevice = useMediaQuery({ maxWidth:750 });
+
     return (
-      <div className={`${styles.toolBar} ${mobileDevice ? null : styles.mobileToolBar}`}>
+      <div className={`${styles.toolBar} ${mobileDevice ? styles.mobileToolBar : null}`}>
         <Logo></Logo>
         <AppName></AppName>
         <AddTask></AddTask>
