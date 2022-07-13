@@ -2,17 +2,9 @@
     width: 100vw;
 }
 
-.desktopPageContent, .mobilePageContent{
+.desktopPageContent{
     min-height: 100vh;
     padding: 20px;
     background-color: rgba(249, 255, 199, 0.644);
-}
-
-.desktopPageContent{
     padding-top: 100px;
 }
-
-.mobilePageContent{
-    padding-top: 200px;
-}
-

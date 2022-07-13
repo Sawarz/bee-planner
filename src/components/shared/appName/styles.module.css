@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-.appName{
+.appName, .mobileAppName{
     font-size: 2rem;
     font-weight: 600;
     font-family: 'Kaushan Script', sans-serif;
     white-space: nowrap;
     overflow: hidden;
     padding: 5px;
+}
+
+.mobileAppName{
+    font-size: 1.5rem;
 }
 
 .nameLink{
