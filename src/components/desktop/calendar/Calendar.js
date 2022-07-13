@@ -29,7 +29,7 @@ export default function Calendar() {
     let start = previousMonthLastDay - numOfDays + 1;
     let divsArray = [];
     for (let i = start; i < previousMonthLastDay + 1; i++){
-      divsArray.push(<div className={styles.grayDay}>{i}</div>);
+      divsArray.push(<div key={i} className={styles.grayDay}>{i}</div>);
     }
     return divsArray;
   }
@@ -41,10 +41,10 @@ export default function Calendar() {
     for (let i = start; i < monthDays + 1; i++){
       if (i !== parseInt(todayDate))
       {
-        divsArray.push(<Link to={`/calendar/` + i + "." + month + "." + year} className={styles.day}>{i}</Link>);
+        divsArray.push(<Link key={i} to={`/calendar/` + i + "." + month + "." + year} className={styles.day}>{i}</Link>);
       }
       else {
-        divsArray.push(<Link to={`/calendar/` + i + "." + month + "." + year} className={styles.currentDay}>{i}</Link>);
+        divsArray.push(<Link key={i} to={`/calendar/` + i + "." + month + "." + year} className={styles.currentDay}>{i}</Link>);
       }
     }
     return divsArray;
@@ -57,7 +57,7 @@ export default function Calendar() {
     let finish = 7 - lastDayWeekday;
     let divsArray = [];
     for (let i = start; i < finish + 1; i++){
-      divsArray.push(<div className={styles.grayDay}>{i}</div>);
+      divsArray.push(<div key={i} className={styles.grayDay}>{i}</div>);
     }
     return divsArray;
   }
