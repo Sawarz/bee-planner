@@ -37,24 +37,33 @@ export default function Login() {
     });
     }
     
-    return <div className={styles.Login}>
-    <div className={styles.header}>
-      <h1>Log in here!</h1>
-    </div>
-      <form className={styles.form} onSubmit={handleSubmit}>
-      <label className={styles.formLabel}>
-        <p>Email</p>
-        <input type="email" onChange={e => setEmail(e.target.value)}/>
-      </label>
-      <label className={styles.formLabel}>
-        <p>Password</p>
-        <input type="password" onChange={e => setPassword(e.target.value)}/>
-      </label>
-      <div className={styles.submitDiv}>
-        <button className={styles.submitButton} type="submit">Submit</button>
+    return (
+    <div className={styles.loginPage}>
+    <div className={styles.Login}>
+      <div className={styles.header}>
+        <h1>Log in here!</h1>
       </div>
-    </form>
-    <div className={styles.errorMessage}>{errorMessage}</div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.formLabel}>
+          <p>Email</p>
+          <input type="email" onChange={e => setEmail(e.target.value)}/>
+        </label>
+        <label className={styles.formLabel}>
+          <p>Password</p>
+          <input type="password" onChange={e => setPassword(e.target.value)}/>
+        </label>
+        <div className={styles.submitDiv}>
+          <button className={styles.submitButton} type="submit">Submit</button>
+        </div>
+      </form>
+      <div className={styles.errorMessage}>{errorMessage}</div>
       <Link className={styles.authLink} to="/register">Create an account here!</Link>
-    </div>;
+    </div>
+    <div className={styles.exampleAccount}>
+      <div className={styles.exampleTitle}>Test the app:</div>
+      <div className={styles.exampleEmail}>Email: tyr55660@jiooq.com</div>
+      <div className={styles.examplePassword}>Password: examplepassword1</div>
+    </div>
+    </div>
+    )
 }
