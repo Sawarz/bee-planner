@@ -15,6 +15,17 @@ export const tasksSlice = createSlice({
             state.splice(arrayIndex, 1);
             return state;
         },
+        updateTask: (state, action) => {
+            for (let task of state) {
+                if (task.id === action.payload.id) {
+                    console.log(action.payload)
+                    task.name = action.payload.name;
+                    task.startHour = action.payload.startHour;
+                    task.startMinute = action.payload.startMinute;
+                }
+            }
+            return state;
+        },
         updateTaskLeftPosition: (state, action) => {
             for (let task of state) {
                 if (task.id === action.payload.id) {
@@ -26,6 +37,6 @@ export const tasksSlice = createSlice({
     }
   })
   
-  export const { addTask, deleteTask, updateTaskLeftPosition } = tasksSlice.actions
+  export const { addTask, deleteTask, updateTask, updateTaskLeftPosition } = tasksSlice.actions
   
   export default tasksSlice.reducer
